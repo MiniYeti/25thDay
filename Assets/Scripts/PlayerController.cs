@@ -62,37 +62,40 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+       
 
 
 		IsGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 
-		if (knockbackCounter <= 0 && canMove) 
-		{
-//#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
-            if (Input.GetAxisRaw ("Horizontal") > 0f) {
-				myRigidBody.velocity = new Vector3 (moveSpeed, myRigidBody.velocity.y, 0f);
-				transform.localScale = new Vector3 (1f, 1f, 1f);
-			} else if (Input.GetAxisRaw ("Horizontal") < 0f) {
-				myRigidBody.velocity = new Vector3 (-moveSpeed, myRigidBody.velocity.y, 0f);
-				transform.localScale = new Vector3 (-1f, 1f, 1f);
-                
-			} 
-			else 
-			{
-				myRigidBody.velocity = new Vector3 (0f, myRigidBody.velocity.y, 0f);
-			}
-
-			if (Input.GetButtonDown ("Jump") && IsGrounded) 
-
-			{
-				myRigidBody.velocity = new Vector3 (myRigidBody.velocity.x, jumpSpeed, 0f);
-                jumpSound.Play();
-			} 
 
 
-    
-}
+        #if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
+        if (knockbackCounter <= 0 && canMove)
+        {
+
+            if (Input.GetAxisRaw("Horizontal") > 0f)
+            {
+                MoveRight();
+            }
+            else if (Input.GetAxisRaw("Horizontal") < 0f)
+            {
+                MoveLeft();
+            }
+            else
+            {
+                myRigidBody.velocity = new Vector3(0f, myRigidBody.velocity.y, 0f);
+            }
+
+            if (Input.GetButtonDown("Jump"))
+
+            {
+                Jump();
+            }
+        }
+        
+        
+        #endif
+
 
 
 
@@ -129,6 +132,44 @@ public class PlayerController : MonoBehaviour {
 		}
 			
 	}
+
+    public void MoveRight()
+    {
+        myRigidBody.velocity = new Vector3(moveSpeed, myRigidBody.velocity.y, 0f);
+        transform.localScale = new Vector3(1f, 1f, 1f);
+    }
+    
+    public void StartRight()
+        
+    {
+
+        myRigidBody.velocity = new Vector3(moveSpeed, myRigidBody.velocity.y, 0f);
+        transform.localScale = new Vector3(1f, 1f, 1f);
+
+    }
+
+
+    public void StopRight()
+    {
+
+        myRigidBody.velocity = new Vector3(0f, 0f, 0f);
+        transform.localScale = new Vector3(1f, 1f, 1f);
+    }
+
+    public void MoveLeft()
+    {
+        myRigidBody.velocity = new Vector3(-moveSpeed, myRigidBody.velocity.y, 0f);
+        transform.localScale = new Vector3(-1f, 1f, 1f);
+    }
+
+    public void Jump()
+    {
+        if (IsGrounded)
+        {
+            myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
+            jumpSound.Play();
+        }
+    }
 
 	public void Knockback()
 	{

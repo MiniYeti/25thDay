@@ -8,16 +8,21 @@ public class MobileControlButtons : MonoBehaviour
 {
 
     public PlayerController thePlayer;
+    public GameObject MobileButtonHolder;
 
     // Use this for initialization
     void Start() {
+#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
+        MobileButtonHolder.SetActive(false);
+  
         thePlayer = FindObjectOfType<PlayerController>();
+#endif
 
     }
 
     // Update is called once per frame
     void Update() {
-        //thePlayer.IsGrounded = Physics2D.OverlapCircle(thePlayer.groundCheck.position, thePlayer.groundCheckRadius, thePlayer.whatIsGround);
+        
 
     }
 

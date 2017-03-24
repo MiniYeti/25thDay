@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 23fa7b1b0763e834db36e51f55be322e
-timeCreated: 1490175839
+timeCreated: 1490347949
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -64,6 +64,9 @@ TextureImporter:
     21300114: Sprites_57
     21300116: Sprites_58
     21300118: Sprites_59
+    21300120: Sprites_60
+    21300122: Sprites_61
+    21300124: Sprites_62
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -920,6 +923,45 @@ TextureImporter:
         y: 179
         width: 152
         height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sprites_60
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 295
+        width: 28
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sprites_61
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 295
+        width: 28
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sprites_62
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 296
+        width: 25
+        height: 28
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
