@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour {
 
     private CameraController theCamera;
     public float shakeAmount;
+    
+    
 
 
 
@@ -67,13 +69,14 @@ public class PlayerController : MonoBehaviour {
 
 		if (knockbackCounter <= 0 && canMove) 
 		{
-
-			if (Input.GetAxisRaw ("Horizontal") > 0f) {
+//#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
+            if (Input.GetAxisRaw ("Horizontal") > 0f) {
 				myRigidBody.velocity = new Vector3 (moveSpeed, myRigidBody.velocity.y, 0f);
 				transform.localScale = new Vector3 (1f, 1f, 1f);
 			} else if (Input.GetAxisRaw ("Horizontal") < 0f) {
 				myRigidBody.velocity = new Vector3 (-moveSpeed, myRigidBody.velocity.y, 0f);
 				transform.localScale = new Vector3 (-1f, 1f, 1f);
+                
 			} 
 			else 
 			{
@@ -88,9 +91,12 @@ public class PlayerController : MonoBehaviour {
 			} 
 
 
-		}	
+    
+}
 
-		if (knockbackCounter > 0) 
+
+
+        if (knockbackCounter > 0) 
 		{
 			knockbackCounter -= Time.deltaTime;
 
