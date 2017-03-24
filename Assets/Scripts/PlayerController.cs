@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 
 	public float knockbackForce;
 	public float knockbackLength;
-	private float knockbackCounter;
+	public float knockbackCounter;
 
 	public float invincibiltyLength;
 	private float invincibiltyCounter;
@@ -69,10 +69,10 @@ public class PlayerController : MonoBehaviour {
 
 
 
-        #if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
-        if (knockbackCounter <= 0 && canMove)
+        
+          if (knockbackCounter <= 0 && canMove)
         {
-
+#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
             if (Input.GetAxisRaw("Horizontal") > 0f)
             {
                 MoveRight();
@@ -91,10 +91,10 @@ public class PlayerController : MonoBehaviour {
             {
                 Jump();
             }
-        }
-        
-        
-        #endif
+#endif
+       }
+
+
 
 
 
