@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 23fa7b1b0763e834db36e51f55be322e
-timeCreated: 1490347949
+timeCreated: 1490372995
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -958,10 +958,10 @@ TextureImporter:
       name: Sprites_62
       rect:
         serializedVersion: 2
-        x: 505
-        y: 296
+        x: 508
+        y: 295
         width: 25
-        height: 28
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
