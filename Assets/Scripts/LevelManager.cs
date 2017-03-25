@@ -56,7 +56,9 @@ public class LevelManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
+
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
 
         blackScreenHolder.SetActive(true);
 

@@ -353,7 +353,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1116667925
+  m_SortingLayerID: 1337959899
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: 23fa7b1b0763e834db36e51f55be322e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -716,24 +716,6 @@ Prefab:
     - target: {fileID: 4592205441502922, guid: 37faf1b2171a467429d9242727c584fd, type: 2}
       propertyPath: m_RootOrder
       value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 4669337222933420, guid: 37faf1b2171a467429d9242727c584fd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.285
-      objectReference: {fileID: 0}
-    - target: {fileID: 1567433942086356, guid: 37faf1b2171a467429d9242727c584fd, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114140696531757344, guid: 37faf1b2171a467429d9242727c584fd,
-        type: 2}
-      propertyPath: knockbackForce
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114140696531757344, guid: 37faf1b2171a467429d9242727c584fd,
-        type: 2}
-      propertyPath: knockbackLength
-      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 37faf1b2171a467429d9242727c584fd, type: 2}
@@ -1381,7 +1363,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1116667925
+  m_SortingLayerID: 1337959899
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300014, guid: 23fa7b1b0763e834db36e51f55be322e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

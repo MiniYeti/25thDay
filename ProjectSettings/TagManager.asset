@@ -44,14 +44,20 @@ TagManager:
   - name: Background
     uniqueID: 1995592183
     locked: 0
-  - name: World Objects
-    uniqueID: 1316377633
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: World Objects
+    uniqueID: 1316377633
+    locked: 0
   - name: Player
     uniqueID: 2581178347
+    locked: 0
+  - name: Houses
+    uniqueID: 2242550297
+    locked: 0
+  - name: Traps
+    uniqueID: 1337959899
     locked: 0
   - name: Level Doors
     uniqueID: 3728600637

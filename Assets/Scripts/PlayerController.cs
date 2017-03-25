@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -39,14 +41,23 @@ public class PlayerController : MonoBehaviour {
 
     private CameraController theCamera;
     public float shakeAmount;
-    
-    
+    public GameObject MobileButtonHolder;
+
+    float hInput = 0;
+
+
+
 
 
 
     // Use this for initialization
     void Start () {
-		myRigidBody = GetComponent<Rigidbody2D> ();
+
+#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITY_BLACKBERRY && !UNITY_WINRT
+        MobileButtonHolder.SetActive(false);
+#endif
+
+        myRigidBody = GetComponent<Rigidbody2D> ();
 		myAnim = GetComponent<Animator> ();
 
 		respawnPosition = transform.position;
@@ -56,71 +67,57 @@ public class PlayerController : MonoBehaviour {
         canMove = true;
 
         theCamera = FindObjectOfType<CameraController>();
+        
 
-	
-	}
+
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
        
 
 
 		IsGrounded = Physics2D.OverlapCircle (groundCheck.position, groundCheckRadius, whatIsGround);
 
-
-
-        
-          if (knockbackCounter <= 0 && canMove)
+#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITY_BLACKBERRY && !UNITY_WINRT
+        if (knockbackCounter <= 0 && canMove)
         {
-#if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
-            if (Input.GetAxisRaw("Horizontal") > 0f)
-            {
-                MoveRight();
-            }
-            else if (Input.GetAxisRaw("Horizontal") < 0f)
-            {
-                MoveLeft();
-            }
-            else
-            {
-                myRigidBody.velocity = new Vector3(0f, myRigidBody.velocity.y, 0f);
-            }
-
+            Move(Input.GetAxis("Horizontal"));
             if (Input.GetButtonDown("Jump"))
-
             {
                 Jump();
             }
+        }
+#else 
+
+        Move(hInput);
 #endif
-      }
 
 
 
+        if (knockbackCounter > 0)
+        {
+            knockbackCounter -= Time.deltaTime;
+        
 
+        	if (transform.localScale.x > 0) {
+        	myRigidBody.velocity = new Vector3 (-knockbackForce, knockbackForce, 0f);
 
+        } else {
+        	myRigidBody.velocity = new Vector3 (knockbackForce, knockbackForce, 0f);
+        }
+        }
+        if (invincibiltyCounter > 0) 
+        {
+        	invincibiltyCounter -= Time.deltaTime;
+        }
 
-       if (knockbackCounter > 0) 
-		{
-			knockbackCounter -= Time.deltaTime;
+        if (invincibiltyCounter <= 0) 
+        {
+        	theLevelManager.invincible = false;
+        }
 
-			if (transform.localScale.x > 0) {
-				myRigidBody.velocity = new Vector3 (-knockbackForce, knockbackForce, 0f);
-			
-			} else {
-				myRigidBody.velocity = new Vector3 (knockbackForce, knockbackForce, 0f);
-			}
-		}
-		if (invincibiltyCounter > 0) 
-		{
-			invincibiltyCounter -= Time.deltaTime;
-		}
-
-		if (invincibiltyCounter <= 0) 
-		{
-			theLevelManager.invincible = false;
-		}
-
-		myAnim.SetFloat ("Speed", Mathf.Abs (myRigidBody.velocity.x));
+        myAnim.SetFloat ("Speed", Mathf.Abs (myRigidBody.velocity.x));
 		myAnim.SetBool ("Grounded", IsGrounded);
 
 
@@ -133,51 +130,45 @@ public class PlayerController : MonoBehaviour {
 			
 	}
 
-    public void MoveRight()
+     
+
+    public void Move(float horizontalInput )
     {
-        myRigidBody.velocity = new Vector3(moveSpeed, myRigidBody.velocity.y, 0f);
-        transform.localScale = new Vector3(1f, 1f, 1f);
-    }
-    
-    public void StartRight()
-        
-    {
+        Vector2 moveVel = myRigidBody.velocity;
+        moveVel.x = horizontalInput * moveSpeed;
+        myRigidBody.velocity = moveVel;
 
-        myRigidBody.velocity = new Vector3(moveSpeed, myRigidBody.velocity.y, 0f);
-        transform.localScale = new Vector3(1f, 1f, 1f);
-
-    }
-
-
-    public void StopRight()
-    {
-
-        myRigidBody.velocity = new Vector3(0f, 0f, 0f);
-        transform.localScale = new Vector3(1f, 1f, 1f);
-    }
-
-    public void MoveLeft()
-    {
-        myRigidBody.velocity = new Vector3(-moveSpeed, myRigidBody.velocity.y, 0f);
-        transform.localScale = new Vector3(-1f, 1f, 1f);
+        if (horizontalInput > 0)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        if (horizontalInput < 0)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }            
     }
 
     public void Jump()
+    {        
+       if (IsGrounded)
+       {
+         myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
+         jumpSound.Play();
+       }        
+    }
+    public void StartMoving(float horizontalInput)
     {
-        if (IsGrounded)
-        {
-            myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
-            jumpSound.Play();
-        }
+        hInput = horizontalInput;
     }
 
-	public void Knockback()
+   public void Knockback()
 	{
 		knockbackCounter = knockbackLength;
 		invincibiltyLength -= invincibiltyLength; 
 		theLevelManager.invincible = true;
         theCamera.ScreenShake(shakeAmount);
     }
+
 
 	void OnTriggerEnter2D(Collider2D other){		
 		if (other.tag == "KillPlane") 
