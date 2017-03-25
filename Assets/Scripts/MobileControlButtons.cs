@@ -14,7 +14,7 @@ public class MobileControlButtons : MonoBehaviour
     void Start()
     {
 #if !UNITY_ANDROID && !UNITY_IPHONE && !UNITYWINRT
-        //MobileButtonHolder.SetActive(false);
+        MobileButtonHolder.SetActive(false);
   
         thePlayer = FindObjectOfType<PlayerController>();
 #endif

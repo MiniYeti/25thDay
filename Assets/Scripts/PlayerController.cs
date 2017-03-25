@@ -92,14 +92,14 @@ public class PlayerController : MonoBehaviour {
                 Jump();
             }
 #endif
-       }
+      }
 
 
 
 
 
 
-        if (knockbackCounter > 0) 
+       if (knockbackCounter > 0) 
 		{
 			knockbackCounter -= Time.deltaTime;
 
