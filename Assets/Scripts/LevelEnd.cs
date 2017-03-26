@@ -32,12 +32,13 @@ public class LevelEnd : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         thePlayer = FindObjectOfType<PlayerController>();
         theCamera = FindObjectOfType<CameraController>();
         theLevelManager = FindObjectOfType<LevelManager>();
         
-        
-       
+
+
 
     }
 	
@@ -47,8 +48,9 @@ public class LevelEnd : MonoBehaviour {
         
 
         if (movePlayer)
-        {
-            thePlayer.myRigidBody.velocity = new Vector3(thePlayer.moveSpeed, thePlayer.myRigidBody.velocity.y, 0f);
+        {   
+            thePlayer.myRigidBody.velocity = new Vector2(thePlayer.moveSpeed, thePlayer.myRigidBody.velocity.y);
+            thePlayer.myAnim.SetFloat("Speed", Mathf.Abs(thePlayer.myRigidBody.velocity.x));
         }
 		
 	}
@@ -59,6 +61,7 @@ public class LevelEnd : MonoBehaviour {
         {
             
             StartCoroutine("LevelEndCo");
+            
         }
     }
 
@@ -82,16 +85,19 @@ public class LevelEnd : MonoBehaviour {
 
         PlayerPrefs.SetInt(levelToUnlock, 1);
 
-
+        
 
 
         yield return new WaitForSeconds(waitToMove);
+        
 
         movePlayer = true;
-
-        
        
-        
+
+
+
+
+
 
         yield return new WaitForSeconds(waitToLoad);
        

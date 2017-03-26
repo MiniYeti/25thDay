@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 
 
-	private Animator myAnim;
+	public Animator myAnim;
 
 	public Vector3 respawnPosition;
 
@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour {
 
     float hInput = 0;
 
+    public bool didJump;
 
 
 
@@ -154,7 +155,8 @@ public class PlayerController : MonoBehaviour {
        {
          myRigidBody.velocity = new Vector3(myRigidBody.velocity.x, jumpSpeed, 0f);
          jumpSound.Play();
-       }        
+       }
+        didJump = true;
     }
     public void StartMoving(float horizontalInput)
     {

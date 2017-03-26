@@ -12,14 +12,15 @@ public class LevelDoor : MonoBehaviour {
     public Sprite doorClosed;
 
     public SpriteRenderer door;
+    public PlayerController thePlayer;
 
-    
 
-    
 
-	// Use this for initialization
-	void Start () {
 
+    // Use this for initialization
+    void Start () {
+
+        thePlayer = FindObjectOfType<PlayerController>();
         PlayerPrefs.SetInt("Level1", 1);
         if (PlayerPrefs.GetInt(levelToLoad) == 1)
         {
@@ -50,7 +51,7 @@ public class LevelDoor : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            if (Input.GetButtonDown("Jump") && unlocked)
+            if (thePlayer.didJump && unlocked)
             {
                 SceneManager.LoadScene(levelToLoad);
             }
