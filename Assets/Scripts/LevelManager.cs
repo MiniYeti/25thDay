@@ -126,8 +126,8 @@ public class LevelManager : MonoBehaviour {
 			StartCoroutine ("RespawnCo");
             isDead = false;
 		} else {
-			thePlayer.gameObject.SetActive (false);
-            gameOverScreen.SetActive(true);
+            StartCoroutine("DeadCo");
+            
             levelMusic.Stop();
             gameOverMusic.Play();
 
@@ -171,7 +171,20 @@ public class LevelManager : MonoBehaviour {
 		}
 	}
 
-	public void AddPresents(int presentsToAdd)
+
+    public IEnumerator DeadCo()
+    {
+        thePlayer.gameObject.SetActive(false);
+
+        Instantiate(deathAnimation, thePlayer.transform.position, thePlayer.transform.rotation);
+
+        yield return new WaitForSeconds(waitToRespawn);
+
+        thePlayer.gameObject.SetActive(false);
+        gameOverScreen.SetActive(true);
+    }
+
+    public void AddPresents(int presentsToAdd)
 	{
 		presentCount += presentsToAdd;
         presentBonusLifeCount += presentsToAdd;
