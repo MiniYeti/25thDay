@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour {
 
 	public GameObject target;
 	public float followAhead;
-	private Vector3 targetPosition;
+	public Vector3 targetPosition;
 	public float smoothing;
 
     public bool followTarget;

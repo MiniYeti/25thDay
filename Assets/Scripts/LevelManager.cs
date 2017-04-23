@@ -48,6 +48,9 @@ public class LevelManager : MonoBehaviour {
 
     public bool isDead;
 
+    public CameraController theCamera;
+
+
     
 
 
@@ -59,6 +62,7 @@ public class LevelManager : MonoBehaviour {
 
         Screen.orientation = ScreenOrientation.LandscapeLeft;
 
+        theCamera = FindObjectOfType<CameraController>();
 
         blackScreenHolder.SetActive(true);
 
@@ -124,6 +128,7 @@ public class LevelManager : MonoBehaviour {
 
 		if (currentLives > 0) {
 			StartCoroutine ("RespawnCo");
+           
             isDead = false;
 		} else {
             StartCoroutine("DeadCo");
@@ -161,9 +166,11 @@ public class LevelManager : MonoBehaviour {
         GiftsText.text = "GIFTS :" + presentCount;
 
         thePlayer.transform.position = thePlayer.respawnPosition;
-		thePlayer.gameObject.SetActive (true);
+        theCamera.transform.position = theCamera.targetPosition;
+        thePlayer.gameObject.SetActive (true);
+        
 
-		for (int i = 0; i < objectsToReset.Length; i++) 
+        for (int i = 0; i < objectsToReset.Length; i++) 
 		{
 			objectsToReset [i].gameObject.SetActive (true);
 			objectsToReset [i].ResetObject ();
